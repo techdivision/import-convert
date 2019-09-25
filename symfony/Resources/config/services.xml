@@ -16,12 +16,18 @@
             <argument type="service" id="loggers"/>
             <argument type="service" id="import.events.emitter"/>
         </service>
-
         <service id="import_converter.subject.move.files" class="TechDivision\Import\Converter\Subjects\MoveFilesSubject" shared="false">
             <argument type="service" id="import.processor.registry"/>
             <argument type="service" id="import.generator.core.config.data.uid"/>
             <argument type="service" id="loggers"/>
             <argument type="service" id="import.events.emitter"/>
+        </service>
+
+        <service id="import_converter.plugin.exportable.converter.generic" class="TechDivision\Import\Converter\Plugins\GenericExportableConverterPlugin">
+            <argument type="service" id="import_app_simple.simple"/>
+            <argument type="service" id="import.plugin.subject.executor"/>
+            <argument type="service" id="import.subject.file.resolver.factory"/>
+            <argument type="service" id="import.processor.registry"/>
         </service>
 
     </services>

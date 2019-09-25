@@ -7,6 +7,7 @@
 ## Features
 
 * Switch to Github distribution
+* Add generic exportable plugin implementation
 
 # Version 8.0.0
 

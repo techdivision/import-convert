@@ -38,4 +38,11 @@ class ConfigurationKeys extends \TechDivision\Import\Utils\ConfigurationKeys
      * @var string
      */
     const CUSTOM_VALIDATIONS = 'custom-validations';
+
+    /**
+     * Name for the configuration key 'exportable-artefact-types'.
+     *
+     * @var string
+     */
+    const EXPORTABLE_ARTEFACT_TYPES = 'exportable-artefact-types';
 }
