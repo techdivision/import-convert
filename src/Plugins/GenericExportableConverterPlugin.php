@@ -121,16 +121,6 @@ class GenericExportableConverterPlugin extends SubjectPlugin implements Exportab
     }
 
     /**
-     * Return's the target directory for the artefact export.
-     *
-     * @return string The target directory for the artefact export
-     */
-    public function getTargetDir()
-    {
-        return sprintf('%s/%s', $this->getConfiguration()->getTargetDir(), $this->getSerial());
-    }
-
-    /**
      * Reset the array with the artefacts to free the memory.
      *
      * @return void
