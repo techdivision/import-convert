@@ -21,14 +21,10 @@
 namespace TechDivision\Import\Converter\Plugins;
 
 use TechDivision\Import\Utils\CacheKeys;
-use TechDivision\Import\ApplicationInterface;
 use TechDivision\Import\Converter\Utils\ConfigurationKeys;
 use TechDivision\Import\Plugins\SubjectPlugin;
 use TechDivision\Import\Plugins\ExportableTrait;
 use TechDivision\Import\Plugins\ExportablePluginInterface;
-use TechDivision\Import\Services\RegistryProcessorInterface;
-use TechDivision\Import\Subjects\SubjectExecutorInterface;
-use TechDivision\Import\Subjects\FileResolver\FileResolverFactoryInterface;
 
 /**
  * Plugin that exports artefacts with type names defined in configuration.
@@ -48,35 +44,6 @@ class GenericExportableConverterPlugin extends SubjectPlugin implements Exportab
      * @var \TechDivision\Import\Plugins\ExportableTrait
      */
     use ExportableTrait;
-
-    /**
-     * The registry processor instance.
-     *
-     * @var \TechDivision\Import\Services\RegistryProcessorInterface
-     */
-    protected $registryProcessor;
-
-    /**
-     * Initializes the plugin with the application instance.
-     *
-     * @param \TechDivision\Import\ApplicationInterface                               $application         The application instance
-     * @param \TechDivision\Import\Subjects\SubjectExecutorInterface                  $subjectExecutor     The subject executor instance
-     * @param \TechDivision\Import\Subjects\FileResolver\FileResolverFactoryInterface $fileResolverFactory The file resolver instance
-     * @param \TechDivision\Import\Services\RegistryProcessorInterface                $registryProcessor   The registry processor instance
-     */
-    public function __construct(
-        ApplicationInterface $application,
-        SubjectExecutorInterface $subjectExecutor,
-        FileResolverFactoryInterface $fileResolverFactory,
-        RegistryProcessorInterface $registryProcessor
-    ) {
-
-        // call the parent constructor
-        parent::__construct($application, $subjectExecutor, $fileResolverFactory);
-
-        // set the subject executor and the file resolver factory
-        $this->registryProcessor = $registryProcessor;
-    }
 
     /**
      * Returns the array with the exportable artefact types from the configuration.
@@ -104,7 +71,7 @@ class GenericExportableConverterPlugin extends SubjectPlugin implements Exportab
     {
 
         // load the available artefacts
-        $artefacts = $this->registryProcessor->getAttribute(CacheKeys::ARTEFACTS);
+        $artefacts = $this->getRegistryProcessor()->getAttribute(CacheKeys::ARTEFACTS);
 
         // initialize the array for the artefacts that has to be exported
         $toExport = array();
