@@ -6,9 +6,6 @@
     <services>
 
         <service id="import_converter.observer.convert.decimals" class="TechDivision\Import\Converter\Observers\ConvertDecimalsObserver"/>
-        <service id="import_converter.observer.validation.generic" class="TechDivision\Import\Converter\Observers\GenericValidationObserver"/>
-
-        <service id="import_converter.callback.generic.configuration.based.validator" class="TechDivision\Import\Converter\Callbacks\GenericConfigurationBasedValidatorCallback"/>
 
         <service id="import_converter.subject.converter" class="TechDivision\Import\Converter\Subjects\ConverterSubject" shared="false">
             <argument type="service" id="import.processor.registry"/>

@@ -6,6 +6,7 @@
 
 ## Features
 
+* Add techdivision/import#162
 * Switch to Github distribution
 * Add generic exportable plugin implementation
 

@@ -33,13 +33,6 @@ class ConfigurationKeys extends \TechDivision\Import\Utils\ConfigurationKeys
 {
 
     /**
-     * Name for the configuration key 'custom-validations'.
-     *
-     * @var string
-     */
-    const CUSTOM_VALIDATIONS = 'custom-validations';
-
-    /**
      * Name for the configuration key 'exportable-artefact-types'.
      *
      * @var string
