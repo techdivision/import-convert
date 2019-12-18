@@ -97,7 +97,7 @@ class AbstractSerializerAwareConverterObserverTest extends AbstractTest
      */
     protected function getSubjectMethodsToMock()
     {
-        return array('getImportAdapter', 'getDefaultCallbackMappings');
+        return array('getImportAdapter', 'getDefaultCallbackMappings', 'getExecutionContext');
     }
 
     /**
