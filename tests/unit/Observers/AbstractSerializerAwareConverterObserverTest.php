@@ -62,7 +62,7 @@ class AbstractSerializerAwareConverterObserverTest extends AbstractTest
      * This method is called before a test is executed.
      *
      * @return void
-     * @see \PHPUnit_Framework_TestCase::setUp()
+     * @see \PHPUnit\Framework\TestCase::setUp()
      */
     protected function setUp()
     {
