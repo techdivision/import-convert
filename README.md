@@ -1,65 +1,10 @@
 # M2IF - Magento 2 Import Converter
 
-```json
-{
-  ...
-  "params" : [
-    {
-      "custom-validations" : {
-        "sku" : [ ".+" ],
-        "tier-price-value-type" : [ "Fixed" ],
-        "tier-price-website" : [ "All Websites" ],
-        "tier-price-customer-group" : [ "ALL GROUPS" ]
-      }
-    }
-  ]
-  ...
-  "operations" : [
-    {
-      "name" : "convert",
-      "plugins" : [
-        {
-          "id": "import.plugin.global.data"
-        },
-        {
-          "id": "import.plugin.subject",
-          "subjects" : [
-            {
-              "id": "import_converter.subject.converter",
-              "identifier": "files",
-              "create-imported-file": false,
-              "file-resolver": {
-                "prefix": "product-import-tier-price"
-              },
-              "observers": [
-                {
-                  "import": [
-                    "import_converter.observer.validation.generic",
-                    "macs_import.observer.export.price"
-                  ]
-                }
-              ],
-              "callbacks": [
-                {
-                  "sku": [
-                    "import_converter.callback.generic.configuration.based.regex.validator"
-                  ],
-                  "tier_price_value_type": [
-                    "import_converter.callback.generic.configuration.based.validator"
-                  ],
-                  "tier_price_customer_group": [
-                    "import_converter.callback.generic.configuration.based.validator"
-                  ],
-                  "tier_price_website": [
-                    "import_converter.callback.generic.configuration.based.validator"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-```
+[![Latest Stable Version](https://img.shields.io/packagist/v/techdivision/import-converter.svg?style=flat-square)](https://packagist.org/packages/techdivision/import-converter) 
+ [![Total Downloads](https://img.shields.io/packagist/dt/techdivision/import-converter.svg?style=flat-square)](https://packagist.org/packages/techdivision/import-converter)
+ [![License](https://img.shields.io/packagist/l/techdivision/import-converter.svg?style=flat-square)](https://packagist.org/packages/techdivision/import-converter)
+ [![Build Status](https://img.shields.io/travis/techdivision/import-converter/master.svg?style=flat-square)](http://travis-ci.org/techdivision/import-converter)
+ [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/techdivision/import-converter/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/techdivision/import-converter/?branch=master)
+ [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/techdivision/import-converter/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/techdivision/import-converter/?branch=master)
+
+Please visit the M2IF [website](https://m2if.com) for documentation and additional information
