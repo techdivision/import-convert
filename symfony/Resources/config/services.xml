@@ -6,9 +6,6 @@
     <services>
 
         <service id="import_converter.observer.convert.decimals" class="TechDivision\Import\Converter\Observers\ConvertDecimalsObserver"/>
-        <service id="import_converter.observer.validation.generic" class="TechDivision\Import\Converter\Observers\GenericValidationObserver"/>
-
-        <service id="import_converter.callback.generic.configuration.based.validator" class="TechDivision\Import\Converter\Callbacks\GenericConfigurationBasedValidatorCallback"/>
 
         <service id="import_converter.subject.converter" class="TechDivision\Import\Converter\Subjects\ConverterSubject" shared="false">
             <argument type="service" id="import.processor.registry"/>
@@ -16,12 +13,17 @@
             <argument type="service" id="loggers"/>
             <argument type="service" id="import.events.emitter"/>
         </service>
-
         <service id="import_converter.subject.move.files" class="TechDivision\Import\Converter\Subjects\MoveFilesSubject" shared="false">
             <argument type="service" id="import.processor.registry"/>
             <argument type="service" id="import.generator.core.config.data.uid"/>
             <argument type="service" id="loggers"/>
             <argument type="service" id="import.events.emitter"/>
+        </service>
+
+        <service id="import_converter.plugin.exportable.converter.generic" class="TechDivision\Import\Converter\Plugins\GenericExportableConverterPlugin">
+            <argument type="service" id="import_app_simple.simple"/>
+            <argument type="service" id="import.plugin.subject.executor"/>
+            <argument type="service" id="import.subject.file.resolver.factory"/>
         </service>
 
     </services>

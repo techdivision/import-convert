@@ -62,7 +62,7 @@ class AbstractSerializerAwareConverterObserverTest extends AbstractTest
      * This method is called before a test is executed.
      *
      * @return void
-     * @see \PHPUnit_Framework_TestCase::setUp()
+     * @see \PHPUnit\Framework\TestCase::setUp()
      */
     protected function setUp()
     {
@@ -71,13 +71,17 @@ class AbstractSerializerAwareConverterObserverTest extends AbstractTest
         $serializer = $this->getMockBuilder(SerializerInterface::class)->getMock();
 
         // create the mock serializer factory
-        $serializerFactory = $this->getMockBuilder(AdditionalAttributeCsvSerializerFactory::class)->disableOriginalConstructor()->getMock();
+        $serializerFactory = $this->getMockBuilder(AdditionalAttributeCsvSerializerFactory::class)
+            ->disableOriginalConstructor()
+            ->getMock();
         $serializerFactory->expects($this->any())
             ->method('createSerializer')
             ->willReturn($serializer);
 
         // initialize the observer we want to test
-        $this->observer = $this->getMockBuilder(AbstractSerializerAwareConverterObserver::class)->setConstructorArgs(array($serializerFactory))->getMockForAbstractClass();
+        $this->observer = $this->getMockBuilder(AbstractSerializerAwareConverterObserver::class)
+            ->setConstructorArgs(array($serializerFactory))
+            ->getMockForAbstractClass();
     }
 
     /**
@@ -97,7 +101,7 @@ class AbstractSerializerAwareConverterObserverTest extends AbstractTest
      */
     protected function getSubjectMethodsToMock()
     {
-        return array('getImportAdapter', 'getDefaultCallbackMappings');
+        return array('getImportAdapter', 'getDefaultCallbackMappings', 'getExecutionContext');
     }
 
     /**
@@ -137,13 +141,17 @@ class AbstractSerializerAwareConverterObserverTest extends AbstractTest
     {
 
         // initialize the mock serializer with the configuration to copy
-        $serializer = $this->getMockBuilder(SerializerInterface::class)->setMethods(get_class_methods(SerializerInterface::class))->getMock();
+        $serializer = $this->getMockBuilder(SerializerInterface::class)
+            ->setMethods(get_class_methods(SerializerInterface::class))
+            ->getMock();
         $serializer->expects($this->any())
             ->method('getCsvConfiguration')
             ->willReturn($this->getMockCsvConfiguration());
 
         // initialize the mock import adapter to load the serializer from
-        $importAdapter = $this->getMockBuilder(SerializerAwareAdapterInterface::class)->setMethods(get_class_methods(SerializerAwareAdapterInterface::class))->getMock();
+        $importAdapter = $this->getMockBuilder(SerializerAwareAdapterInterface::class)
+            ->setMethods(get_class_methods(SerializerAwareAdapterInterface::class))
+            ->getMock();
         $importAdapter->expects($this->any())
             ->method('getSerializer')
             ->willReturn($serializer);

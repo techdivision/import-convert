@@ -1,3 +1,33 @@
+# Version 10.0.1
+
+## Bugfixes
+
+* None
+
+## Features
+
+* Update REAMDE.md
+
+# Version 10.0.0
+
+## Bugfixes
+
+* None
+
+## Features
+
+* Switch to latest techdivision/import 16.* version as dependency
+
+# Version 9.0.1
+
+## Bugfixes
+
+* None
+
+## Features
+
+* Extract dev autoloading
+
 # Version 9.0.0
 
 ## Bugfixes
@@ -6,7 +36,9 @@
 
 ## Features
 
+* Add techdivision/import#162
 * Switch to Github distribution
+* Add generic exportable plugin implementation
 
 # Version 8.0.0
 
