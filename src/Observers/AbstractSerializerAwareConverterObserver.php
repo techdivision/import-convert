@@ -22,9 +22,9 @@ namespace TechDivision\Import\Converter\Observers;
 
 use TechDivision\Import\Subjects\SubjectInterface;
 use TechDivision\Import\Observers\ObserverFactoryInterface;
-use TechDivision\Import\Serializers\SerializerInterface;
-use TechDivision\Import\Serializers\SerializerAwareInterface;
-use TechDivision\Import\Serializers\ConfigurationAwareSerializerFactoryInterface;
+use TechDivision\Import\Serializer\SerializerInterface;
+use TechDivision\Import\Serializer\SerializerAwareInterface;
+use TechDivision\Import\Serializer\SerializerFactoryInterface;
 
 /**
  * Abstract import converter implementation that contains a customer serializer.
@@ -41,23 +41,23 @@ abstract class AbstractSerializerAwareConverterObserver extends AbstractConverte
     /**
      * The custom serializer instance to use.
      *
-     * @var \TechDivision\Import\Serializers\SerializerInterface
+     * @var \TechDivision\Import\Serializer\SerializerInterface
      */
     protected $serializer;
 
     /**
      * The serializer factory to use.
      *
-     * @var \TechDivision\Import\Serializers\ConfigurationAwareSerializerFactoryInterface
+     * @var \TechDivision\Import\Serializer\SerializerFactoryInterface
      */
     protected $serializerFactory;
 
     /**
      * The constructor to initialize the instance.
      *
-     * @param \TechDivision\Import\Serializers\ConfigurationAwareSerializerFactoryInterface $serializerFactory The serializer factory instance
+     * @param \TechDivision\Import\Serializer\SerializerFactoryInterface $serializerFactory The serializer factory instance
      */
-    public function __construct(ConfigurationAwareSerializerFactoryInterface $serializerFactory)
+    public function __construct(SerializerFactoryInterface $serializerFactory)
     {
         $this->serializerFactory = $serializerFactory;
     }
@@ -73,7 +73,7 @@ abstract class AbstractSerializerAwareConverterObserver extends AbstractConverte
     {
 
         // initialize the serializer with the default serializer configuration from the passed subject
-        $this->setSerializer($this->serializerFactory->createSerializer($subject->getImportAdapter()->getSerializer()->getCsvConfiguration()));
+        $this->setSerializer($subject->getImportAdapter()->getSerializer());
 
         // return the instance
         return $this;
@@ -82,7 +82,7 @@ abstract class AbstractSerializerAwareConverterObserver extends AbstractConverte
     /**
      * Sets the serializer instance.
      *
-     * @param \TechDivision\Import\Serializers\SerializerInterface $serializer The serializer instance
+     * @param \TechDivision\Import\Serializer\SerializerInterface $serializer The serializer instance
      *
      * @return void
      */
@@ -94,7 +94,7 @@ abstract class AbstractSerializerAwareConverterObserver extends AbstractConverte
     /**
      * Returns the serializer instance.
      *
-     * @return \TechDivision\Import\Serializers\SerializerInterface The serializer instance
+     * @return \TechDivision\Import\Serializer\SerializerInterface The serializer instance
      */
     public function getSerializer()
     {

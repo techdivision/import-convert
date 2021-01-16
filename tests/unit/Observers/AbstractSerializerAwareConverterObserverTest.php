@@ -22,10 +22,9 @@ namespace TechDivision\Import\Converter\Observers;
 
 use TechDivision\Import\Subjects\AbstractTest;
 use TechDivision\Import\Converter\Subjects\ConverterSubject;
-use TechDivision\Import\Configuration\CsvConfigurationInterface;
 use TechDivision\Import\Adapter\SerializerAwareAdapterInterface;
-use TechDivision\Import\Serializers\SerializerInterface;
-use TechDivision\Import\Serializers\AdditionalAttributeCsvSerializerFactory;
+use TechDivision\Import\Serializer\SerializerInterface;
+use TechDivision\Import\Serializer\SerializerFactoryInterface;
 
 /**
  * Test class for the serializer aware subject instance.
@@ -71,7 +70,7 @@ class AbstractSerializerAwareConverterObserverTest extends AbstractTest
         $serializer = $this->getMockBuilder(SerializerInterface::class)->getMock();
 
         // create the mock serializer factory
-        $serializerFactory = $this->getMockBuilder(AdditionalAttributeCsvSerializerFactory::class)
+        $serializerFactory = $this->getMockBuilder(SerializerFactoryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
         $serializerFactory->expects($this->any())
@@ -105,34 +104,6 @@ class AbstractSerializerAwareConverterObserverTest extends AbstractTest
     }
 
     /**
-     * Create and return a mock CSV configuration instance.
-     *
-     * @param array $csvConfiguration The CSV configuration to use (will override with the default one)
-     *
-     * @return \TechDivision\Import\Configuration\CsvConfigurationInterface The configuration instance
-     */
-    protected function getMockCsvConfiguration(array $csvConfiguration = array())
-    {
-
-        // merge the default configuration with the passed on
-        $csvConfiguration = array_merge($this->defaultCsvConfiguration, $csvConfiguration);
-
-        // create a mock configuration instance
-        $mockCsvConfiguration = $this->getMockBuilder(CsvConfigurationInterface::class)->getMock();
-
-        // mock the methods
-        foreach ($csvConfiguration as $methodName => $returnValue) {
-            // mock the methods
-            $mockCsvConfiguration->expects($this->any())
-                ->method($methodName)
-                ->willReturn($returnValue);
-        }
-
-        // return the mock configuration
-        return $mockCsvConfiguration;
-    }
-
-    /**
      * Test the createObserver() method and checks if the serializer has been set.
      *
      * @return void
@@ -144,9 +115,6 @@ class AbstractSerializerAwareConverterObserverTest extends AbstractTest
         $serializer = $this->getMockBuilder(SerializerInterface::class)
             ->setMethods(get_class_methods(SerializerInterface::class))
             ->getMock();
-        $serializer->expects($this->any())
-            ->method('getCsvConfiguration')
-            ->willReturn($this->getMockCsvConfiguration());
 
         // initialize the mock import adapter to load the serializer from
         $importAdapter = $this->getMockBuilder(SerializerAwareAdapterInterface::class)
